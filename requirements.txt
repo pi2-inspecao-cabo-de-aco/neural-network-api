@@ -1,5 +1,5 @@
 fastapi
+fastai
 requests
-spacy==2.0.12
 email-validator
 numpy
