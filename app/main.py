@@ -2,28 +2,17 @@ from fastapi import FastAPI
 from fastai import *
 from fastai.vision import *
 from starlette.responses import JSONResponse
-import io
 from os.path import dirname, abspath, join
-from PIL import Image
-from helpers import ignore_wanings
+from helpers import ignore_wanings, read_byte_img
 
 ignore_wanings()
 
 model_path = Path('./models/resnet50')
-
 dirname = dirname(dirname(abspath(__file__)))
 images_path = join(dirname, 'public/')
-
-app = FastAPI()
-
 learn = load_learner(model_path, 'model.pkl')
 
-def read_byte_img(image_path):
-  img = Image.open(image_path, mode='r')
-  imgByteArr = io.BytesIO()
-  img.save(imgByteArr, format='PNG')
-
-  return imgByteArr
+app = FastAPI()
 
 @app.get('/')
 def root():
