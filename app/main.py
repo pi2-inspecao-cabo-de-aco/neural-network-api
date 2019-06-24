@@ -3,7 +3,7 @@ from fastai import *
 from fastai.vision import *
 from starlette.responses import JSONResponse
 from os.path import dirname, abspath, join
-from helpers import ignore_wanings, read_byte_img
+from helpers import ignore_wanings
 
 ignore_wanings()
 
@@ -24,12 +24,11 @@ app = FastAPI(
 def root():
   return {'Inspeção de Cabo de Aço - Neural Network API'}
 
-@app.post('/analyze', )
-async def analyze(image_name: str):
-  """Returns the classification of the state of the cable using the neural network, given an image"""
-  image_name = image_name + '.png'
-  img = images_path + image_name
-  byte_img = read_byte_img(img)
-  prediction = learn.predict(byte_img)[0]
+@app.post('/analyze/{image_name}')
+def analyze(image_name: str):
+  """Returns the classification of the condition of cable using the neural network, given an image"""
+  img = images_path + image_name + '.png'
+  img_to_predict = open_image(img)
+  prediction = learn.predict(img_to_predict)[0]
 
-  return JSONResponse({'result': str(prediction)})
+  return JSONResponse({'condition': str(prediction)})

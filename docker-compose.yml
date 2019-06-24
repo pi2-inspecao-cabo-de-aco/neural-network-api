@@ -1,12 +1,11 @@
 version: '3.5'
 
 services:
-  api:
+  neural_net_api:
     build: .
     environment:
      - EXTERNAL_HOST=${EXTERNAL_HOST:-http://localhost}
      - BACKEND_URL=${BACKEND_URL:-http://server:4000/}
-     - WEB_CONCURRENCY=4
      - HOST=0.0.0.0
     ports:
      - "80:80"
