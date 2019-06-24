@@ -12,14 +12,21 @@ dirname = dirname(dirname(abspath(__file__)))
 images_path = join(dirname, 'public/')
 learn = load_learner(model_path, 'model.pkl')
 
-app = FastAPI()
+print(images_path)
+
+app = FastAPI(
+  title = 'Neural Network API',
+  description = 'Projeto referente à API da Rede Neural do projeto Inspeção de Cabo de Aço',
+  version = '1.0'
+)
 
 @app.get('/')
 def root():
   return {'Inspeção de Cabo de Aço - Neural Network API'}
 
-@app.post('/analyze')
-def analyze(image_name: str):
+@app.post('/analyze', )
+async def analyze(image_name: str):
+  """Returns the classification of the state of the cable using the neural network, given an image"""
   image_name = image_name + '.png'
   img = images_path + image_name
   byte_img = read_byte_img(img)
