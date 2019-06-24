@@ -5,11 +5,14 @@ from starlette.responses import JSONResponse
 import io
 from os.path import dirname, abspath, join
 from PIL import Image
+from helpers import ignore_wanings
+
+ignore_wanings()
 
 model_path = Path('./models/resnet50')
 
 dirname = dirname(dirname(abspath(__file__)))
-images_path = join(dirname, '/public/')
+images_path = join(dirname, 'public/')
 
 app = FastAPI()
 
@@ -22,11 +25,11 @@ def read_byte_img(image_path):
 
   return imgByteArr
 
-@app.get("/")
+@app.get('/')
 def root():
-  return {"Inspeção de Cabo de Aço - Neural Network API"}
+  return {'Inspeção de Cabo de Aço - Neural Network API'}
 
-@app.post("/analyze")
+@app.post('/analyze')
 def analyze(image_name: str):
   image_name = image_name + '.png'
   img = images_path + image_name
