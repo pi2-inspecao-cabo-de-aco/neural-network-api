@@ -1,0 +1,5 @@
+fastapi
+fastai
+requests
+email-validator
+numpy

@@ -1,0 +1,17 @@
+version: '3.5'
+
+services:
+  neural_net_api:
+    build: .
+    environment:
+     - EXTERNAL_HOST=${EXTERNAL_HOST:-http://localhost}
+     - BACKEND_URL=${BACKEND_URL:-http://server:4000/}
+     - HOST=0.0.0.0
+    ports:
+     - "80:80"
+    networks:
+     - pi2
+
+networks:
+  pi2:
+    external: true
