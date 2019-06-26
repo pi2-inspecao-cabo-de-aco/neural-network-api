@@ -1,7 +1,7 @@
 version: '3.5'
 
 services:
-  neural_net_api:
+  net_api:
     build: .
     environment:
      - EXTERNAL_HOST=${EXTERNAL_HOST:-http://localhost}
@@ -11,6 +11,14 @@ services:
      - "80:80"
     networks:
      - pi2
+    volumes:
+      - ./app:/app
+      - static-files:/app/public
+
+volumes:
+  static-files:
+    external:
+      name: main-server_static-files
 
 networks:
   pi2:

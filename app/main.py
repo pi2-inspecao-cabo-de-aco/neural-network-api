@@ -8,10 +8,11 @@ from helpers import ignore_wanings
 ignore_wanings()
 
 model_path = Path('./models/resnet50')
-dirname = dirname(dirname(abspath(__file__)))
-images_path = join(dirname, 'public/')
+root_path = dirname(abspath(__file__))
+images_path = join(root_path, 'public/images/')
 learn = load_learner(model_path, 'model.pkl')
 
+print(root_path)
 print(images_path)
 
 app = FastAPI(
