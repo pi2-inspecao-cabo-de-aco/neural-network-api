@@ -9,17 +9,11 @@ services:
      - HOST=0.0.0.0
     ports:
      - "80:80"
-    networks:
-     - pi2
     volumes:
       - ./app:/app
-      - static-files:/app/public
+      - /home/thiago/Desktop/UnB/pi2/main-server/public/:/app/public
 
 volumes:
   static-files:
     external:
       name: main-server_static-files
-
-networks:
-  pi2:
-    external: true
